@@ -63,13 +63,7 @@ html {
   gap: 40px;
 }
 
-.game-1 {
-  border: 1px solid;
-  border-radius: 5px;
-  padding: 4px;
-}
-
-.game-2 {
+.game-card {
   border: 1px solid;
   border-radius: 5px;
   padding: 4px;
