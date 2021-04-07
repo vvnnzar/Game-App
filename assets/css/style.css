@@ -68,3 +68,10 @@ html {
   border-radius: 5px;
   padding: 4px;
 }
+
+.game-card:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(8, 114, 244, 0.6);
+  transition: transform 150ms;
+  transform: scale(1.08);
+}
