@@ -43,8 +43,11 @@ a span:nth-child(1) {
 }
 
 .logo {
-  color: #ffffff
+  color: #fff;
   font-family: "Press Start 2P", cursive;
+  font-size: 3em;
+  text-shadow: 0 0 50px #0f0, 0 0 100px #0f0, 0 0 150px #0f0, 0 0 200px #0f0,
+    0 0 250px #0f0;
 }
 
 .navigation-bar {
@@ -115,4 +118,4 @@ a span:nth-child(1) {
   object-fit: contain;
 }
 
-@media 
+@media;
