@@ -13,7 +13,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
-
+    <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <title>Gaming App</title>
   </head>
   <body>
@@ -23,69 +23,180 @@
         <ul class="nav-list">
           <li><a href="#search">Search</a></li>
           <li><a href="#addGame">Add Game</a></li>
-          <li><a href="#signUp">Sign Up</a></li>
+          <li><a href="#s2ignUp">Sign Up</a></li>
           <li><a href="#contactUs">Contact Us</a></li>
         </ul>
       </div>
     </header>
     <br />
-    <main>
-      <div class="main-section">
-        <div class="popular">
-          <h2 class="banner">Popular this month</h2>
-        </div>
-        <br />
+    <main class="main-section">
+      <div class="popular">
+        <h2 class="banner">Popular this month</h2>
+      </div>
+      <br />
+      <!--Slider-->
+      <div class="container">
+        <div id="content-slider">
+          <div id="slider">
+            <!-- Slider container -->
+            <div id="mask">
+              <!-- Mask -->
 
-        <div class="grid-container">
-          <div class="game-card">
-            <h5 class="game-tittle">Game Title</h5>
-            <p>This is some text about the game</p>
+              <ul>
+                <li id="first" class="firstanimation">
+                  <!-- ID for tooltip and class for animation -->
+                  <a href="#">
+                    <img src=".assets/images/img_1.jpg" alt="game image" />
+                  </a>
+                  <div class="tooltip"><h1>Game Image 1</h1></div>
+                </li>
+
+                <li id="second" class="secondanimation">
+                  <a href="#">
+                    <img src=".assets/images/img_2.jpg" alt="game image" />
+                  </a>
+                  <div class="tooltip"><h1>Game Image 2</h1></div>
+                </li>
+
+                <li id="third" class="thirdanimation">
+                  <a href="#">
+                    <img src=".assets/images/img_3.jpg" alt="game image" />
+                  </a>
+                  <div class="tooltip"><h1>Game Image 3</h1></div>
+                </li>
+
+                <li id="fourth" class="fourthanimation">
+                  <a href="#">
+                    <img src=".assets/images/img_4.jpg" alt="game image" />
+                  </a>
+                  <div class="tooltip"><h1>Game Image 4</h1></div>
+                </li>
+
+                <li id="fifth" class="fifthanimation">
+                  <a href="#">
+                    <img src=".assets/images/img_5.jpg" alt="game image" />
+                  </a>
+                  <div class="tooltip"><h1>Sunbathing</h1></div>
+                </li>
+              </ul>
+            </div>
+            <!-- End Mask -->
+            <div class="progress-bar"></div>
+            <!-- Progress Bar -->
           </div>
-          <div class="game-card">
-            <h5 class="game-tittle">Game Title</h5>
-            <p>This is some text about the game</p>
-          </div>
-          <div class="game-card">
-            <h5 class="game-tittle">Game Title</h5>
-            <p>This is some text about the game</p>
-          </div>
-          <div class="game-card">
-            <h5 class="game-tittle">Game Title</h5>
-            <p>This is some text about the game</p>
-          </div>
-          <div class="game-card">
-            <h5 class="game-tittle">Game Title</h5>
-            <p>This is some text about the game</p>
-          </div>
-          <div class="game-card">
-            <h5 class="game-tittle">Game Title</h5>
-            <p>This is some text about the game</p>
-          </div>
-          <div class="game-card">
-            <h5 class="game-tittle">Game Title</h5>
-            <p>This is some text about the game</p>
-          </div>
-          <div class="game-card">
-            <h5 class="game-tittle">Game Title</h5>
-            <p>This is some text about the game</p>
-          </div>
-          <div class="game-card">
-            <h5 class="game-tittle">Game Title</h5>
-            <p>This is some text about the game</p>
-          </div>
-          <div class="game-card">
-            <h5 class="game-tittle">Game Title</h5>
-            <p>This is some text about the game</p>
-          </div>
-          <div class="game-card">
-            <h5 class="game-tittle">Game Title</h5>
-            <p>This is some text about the game</p>
-          </div>
-          <div class="game-card">
-            <h5 class="game-tittle">Game Title</h5>
-            <p>This is some text about the game</p>
-          </div>
+          <!-- End Slider Container -->
         </div>
+      </div>
+      <br />
+      <br />
+      <div class="grid-container">
+        <div class="game-card">
+          <img
+            class="card-image"
+            src="./assets/Cyberpunk-kitsch.jpeg"
+            alt="cyberpunk"
+          />
+          <h5 class="game-title">Game Title</h5>
+          <p>This is some text about the game</p>
+        </div>
+        <div class="game-card">
+          <h5 class="game-title">Game Title</h5>
+          <p>This is some text about the game</p>
+        </div>
+        <div class="game-card">
+          <h5 class="game-title">Game Title</h5>
+          <p>This is some text about the game</p>
+        </div>
+        <div class="game-card">
+          <h5 class="game-title">Game Title</h5>
+          <p>This is some text about the game</p>
+        </div>
+        <div class="game-card">
+          <h5 class="game-title">Game Title</h5>
+          <p>This is some text about the game</p>
+        </div>
+        <div class="game-card">
+          <h5 class="game-title">Game Title</h5>
+          <p>This is some text about the game</p>
+        </div>
+        <div class="game-card">
+          <h5 class="game-title">Game Title</h5>
+          <p>This is some text about the game</p>
+        </div>
+        <div class="game-card">
+          <h5 class="game-title">Game Title</h5>
+          <p>This is some text about the game</p>
+        </div>
+        <div class="game-card">
+          <h5 class="game-title">Game Title</h5>
+          <p>This is some text about the game</p>
+        </div>
+      </div>
+      <br />
+      <div class="footer">
+        <p>Keep in Touch!</p>
+        <ul>
+          <li>
+            <a
+              title="Facebook"
+              class="footer-socials"
+              href="http://www.facebook.com"
+              target="_blank"
+            >
+              <img width="50" scr=""
+            /></a>
+          </li>
+          <li>
+            <a
+              title="Facebook"
+              class="footer-socials"
+              href="http://www.facebook.com"
+              target="_blank"
+            >
+              <img width="50" scr=""
+            /></a>
+          </li>
+          <li>
+            <a
+              title="Twitter"
+              class="footer-socials"
+              href="http://www.twitter.com"
+              target="_blank"
+            >
+              <img width="50" scr=""
+            /></a>
+          </li>
+          <li>
+            <a
+              title="LinkedIn"
+              class="footer-socials"
+              href="https://au.linkedin.com/"
+              target="_blank"
+            >
+              <img width="50" scr=""
+            /></a>
+          </li>
+          <li>
+            <a
+              title="YouTube"
+              class="footer-socials"
+              href="https://www.youtube.com/"
+              target="_blank"
+            >
+              <img width="50" scr=""
+            /></a>
+          </li>
+          <li>
+            <a
+              title="Email"
+              class="footer-socials"
+              href="/emailpreferences"
+              target="_blank"
+            >
+              <img width="50" scr=""
+            /></a>
+          </li>
+        </ul>
       </div>
     </main>
     <script src="./assets/js/script.js"></script>
