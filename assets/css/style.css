@@ -48,6 +48,16 @@ a span:nth-child(1) {
   font-size: 3em;
   text-shadow: 0 0 50px #0f0, 0 0 100px #0f0, 0 0 150px #0f0, 0 0 200px #0f0,
     0 0 250px #0f0;
+  animation: animate 5s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
 }
 
 .navigation-bar {
@@ -91,6 +101,7 @@ a span:nth-child(1) {
 }
 
 .grid-container {
+  border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(3, calc(25% - 30px));
   grid-template-rows: repeat(3, 600px);
@@ -117,5 +128,3 @@ a span:nth-child(1) {
   height: px;
   object-fit: contain;
 }
-
-@media;
