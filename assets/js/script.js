@@ -28,6 +28,7 @@ function getSteamIDs(games) {
       })
       .then(function (data) {
         console.log(data)
+        console.log(data)
         // var steamId = data.findBestGameDeal(data);
       });
   })
