@@ -13,28 +13,50 @@ var gamesStore = [];
  * Based on that JS will convert them to actual date format expected by Rawg API.
  * */
 
+function getBestDeal(steamIdList) {
+  console.log(steamIdList)
+  games.forEach(function (game) {
+    var cheapestDealRequest = "https://www.cheapshark.com/api/1.0/deals?id=" + game['cheapestDealId'];
+    fetch(cheapestDealRequest)
+      .then(function(data){
+        return data.json();
+      })
+      .then(function(jsonResp){
+        game['cheapestPrice'] = jsonResp.price;
+        game['salePrice'] = jsonResp.salePrice;
+        game['retailPrice'] = jsonResp.retailPrice;
+        gamesStore.push(game);
+        return gamesStore
+      })
+      .then(function(store){
+        //console.log(JSON.stringify(gamesStore))
+      })
+  })
+}
+
 /**
  * Function to extract steamId for a given game title
  * @param {} popularGames
  */
 
-function getSteamIDs(games) {
-  games.forEach(function (game) {
+function getSteamIDs(gamesList) {
+  gamesList.forEach(function (game) {
     var steamRequest =
       "https://www.cheapshark.com/api/1.0/games?title=" + game.name;
-    fetch(steamRequest)
+      fetch(steamRequest)
       .then(function (steamResponse) {
         return steamResponse.json();
       })
-      .then(function (data) {
-        console.log(data)
-        console.log(data)
-        // var steamId = data.findBestGameDeal(data);
-      });
+      .then(function (steamData) {
+        game['cheapestDealId'] = steamData[0].cheapestDealID;
+        game['thumb'] = steamData[0].thumb;
+        game['gameID'] = steamData[0].gameID;
+        return;
+      })
   })
+  console.log(gamesList)
 
-
-
+  return gamesList;
 }
 
 /**
@@ -49,7 +71,6 @@ function prepareGamesList(popularGames) {
     };
     gamesStore.push(game);
   });
-  console.log(JSON.stringify(gamesStore));
   return gamesStore;
 }
 
@@ -74,8 +95,11 @@ function getPopularGames(
     .then(function (data) {
       return prepareGamesList(data);
     })
-    .then(function (games) {
-      getSteamIDs(games);
+    .then(function (gamesList) {
+      getSteamIDs(gamesList);
+    })
+    .then(function(steamIdList){
+      getBestDeal(steamIdList)
     });
 }
 
