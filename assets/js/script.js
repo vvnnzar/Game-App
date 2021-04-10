@@ -18,17 +18,22 @@ var gamesStore = [];
  * @param {} popularGames
  */
 
-function getSteamIDs(game) {
-  var steamRequest =
-    "https://www.cheapshark.com/api/1.0/games?title=" + game.name;
+function getSteamIDs(games) {
+  games.forEach(function (game) {
+    var steamRequest =
+      "https://www.cheapshark.com/api/1.0/games?title=" + game.name;
+    fetch(steamRequest)
+      .then(function (steamResponse) {
+        return steamResponse.json();
+      })
+      .then(function (data) {
+        console.log(data)
+        // var steamId = data.findBestGameDeal(data);
+      });
+  })
 
-  fetch(steamRequest)
-    .then(function (steamResponse) {
-      return steamResponse.json();
-    })
-    .then(function (data) {
-      var steamId = data.findBestGameDeal(data);
-    });
+
+
 }
 
 /**
