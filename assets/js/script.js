@@ -13,25 +13,35 @@ var gamesStore = [];
  * Based on that JS will convert them to actual date format expected by Rawg API.
  * */
 
-function getBestDeal(steamIdList) {
-  console.log(steamIdList)
-  games.forEach(function (game) {
-    var cheapestDealRequest = "https://www.cheapshark.com/api/1.0/deals?id=" + game['cheapestDealId'];
-    fetch(cheapestDealRequest)
-      .then(function(data){
-        return data.json();
-      })
-      .then(function(jsonResp){
-        game['cheapestPrice'] = jsonResp.price;
-        game['salePrice'] = jsonResp.salePrice;
-        game['retailPrice'] = jsonResp.retailPrice;
-        gamesStore.push(game);
-        return gamesStore
-      })
-      .then(function(store){
-        //console.log(JSON.stringify(gamesStore))
-      })
-  })
+
+
+/**
+ * Function to render each game on to the HTML layout
+ */
+function displayGame(finalGame) {
+  console.log(finalGame);
+}
+
+/**
+ * Function for fetching the cheapest deal and enriching the exisitng game data object.
+ * @param {} steamGameData 
+ */
+
+function getBestDeal(steamGameData) {
+  var cheapestDealRequest = "https://www.cheapshark.com/api/1.0/deals?id=" + steamGameData['cheapestDealId'];
+  fetch(cheapestDealRequest)
+    .then(function (data) {
+      return data.json();
+    })
+    .then(function (jsonResp) {
+      game["cheapestPrice"] = jsonResp.cheapestPrice.price;
+      game["salePrice"] = jsonResp.gameInfo.salePrice;
+      game["retailPrice"] = jsonResp.gameInfo.retailPrice;
+      return game;
+    })
+    .then(function (finalGameData) {
+      displayGame(finalGameData);
+    })
 }
 
 /**
@@ -43,20 +53,21 @@ function getSteamIDs(gamesList) {
   gamesList.forEach(function (game) {
     var steamRequest =
       "https://www.cheapshark.com/api/1.0/games?title=" + game.name;
-      fetch(steamRequest)
+    fetch(steamRequest)
       .then(function (steamResponse) {
         return steamResponse.json();
       })
       .then(function (steamData) {
-        game['cheapestDealId'] = steamData[0].cheapestDealID;
-        game['thumb'] = steamData[0].thumb;
-        game['gameID'] = steamData[0].gameID;
-        return;
+        game["cheapestDealId"] = steamData[0].cheapestDealID;
+        game["thumb"] = steamData[0].thumb;
+        game["gameID"] = steamData[0].gameID;
+        return game;
+      })
+      .then(function (updatedGameData) {
+        getBestDeal(updatedGameData);
       })
   })
-  console.log(gamesList)
 
-  return gamesList;
 }
 
 /**
@@ -98,9 +109,9 @@ function getPopularGames(
     .then(function (gamesList) {
       getSteamIDs(gamesList);
     })
-    .then(function(steamIdList){
-      getBestDeal(steamIdList)
-    });
+  // .then(function(steamIdList){
+  //   getBestDeal(steamIdList)
+  // });
 }
 
 getPopularGames(); //to be removed after frontend is fully functional.
