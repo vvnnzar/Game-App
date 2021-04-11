@@ -5,6 +5,8 @@ var popularGamesList = [];
 var defaultStartDate = "2019-01-01"; //both dates to be generated dynamically
 var defaultEndDate = "2019-12-31";
 var gamesStore = [];
+var gameCardEls = document.querySelectorAll(".game-card");
+var gameCardIndex = 0;
 
 /**
  * Need to decide on the expected date range inputs, from html inputs.
@@ -18,8 +20,10 @@ var gamesStore = [];
 /**
  * Function to render each game on to the HTML layout
  */
-function displayGame(finalGame) {
-  console.log(finalGame);
+function displayGame(finalGame, gameCardIndex) {
+
+
+
 }
 
 /**
@@ -27,20 +31,25 @@ function displayGame(finalGame) {
  * @param {} steamGameData 
  */
 
-function getBestDeal(steamGameData) {
+function getBestDeal(steamGameData, gameCardIndex) {
   var cheapestDealRequest = "https://www.cheapshark.com/api/1.0/deals?id=" + steamGameData['cheapestDealId'];
   fetch(cheapestDealRequest)
     .then(function (data) {
       return data.json();
     })
     .then(function (jsonResp) {
-      game["cheapestPrice"] = jsonResp.cheapestPrice.price;
-      game["salePrice"] = jsonResp.gameInfo.salePrice;
-      game["retailPrice"] = jsonResp.gameInfo.retailPrice;
-      return game;
+      steamGameData["cheapestPrice"] = jsonResp.cheapestPrice.price;
+      steamGameData["salePrice"] = jsonResp.gameInfo.salePrice;
+      steamGameData["retailPrice"] = jsonResp.gameInfo.retailPrice;
+      return steamGameData;
     })
     .then(function (finalGameData) {
-      displayGame(finalGameData);
+      //displayGame(finalGameData, gameCardIndex);
+      gameCardIndex++;
+      var gameCardTitleEl = document.createElement("p");
+      gameCardTitleEl.innerHTML = "Title: " + finalGameData.name;
+      gameCardEls[gameCardIndex].append(gameCardTitleEl);
+
     })
 }
 
@@ -50,6 +59,7 @@ function getBestDeal(steamGameData) {
  */
 
 function getSteamIDs(gamesList) {
+  var gameCardIndex = 0;
   gamesList.forEach(function (game) {
     var steamRequest =
       "https://www.cheapshark.com/api/1.0/games?title=" + game.name;
@@ -63,8 +73,9 @@ function getSteamIDs(gamesList) {
         game["gameID"] = steamData[0].gameID;
         return game;
       })
-      .then(function (updatedGameData) {
-        getBestDeal(updatedGameData);
+      .then(function (updatedGame) {
+        getBestDeal(updatedGame);
+        gameCardIndex++
       })
   })
 
@@ -109,9 +120,6 @@ function getPopularGames(
     .then(function (gamesList) {
       getSteamIDs(gamesList);
     })
-  // .then(function(steamIdList){
-  //   getBestDeal(steamIdList)
-  // });
 }
 
 getPopularGames(); //to be removed after frontend is fully functional.
