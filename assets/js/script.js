@@ -1,12 +1,13 @@
 //Declare and intialize variables.
-var fetchButton = document.getElementById("fetch-button");
-var repoTable = document.getElementById("something");
+var fetchButton = document.getElementById(".submit");
 var popularGamesList = [];
 var defaultStartDate = "2019-01-01"; //both dates to be generated dynamically
 var defaultEndDate = "2019-12-31";
 var gamesStore = [];
 var gameCardEls = document.querySelectorAll(".game-card");
 var gameCardIndex = 0;
+var UserStartDate = document.getElementById('.startDate');
+var userEndDate = document.getElementById('.endDate');
 
 /**
  * Need to decide on the expected date range inputs, from html inputs.
@@ -20,9 +21,18 @@ var gameCardIndex = 0;
 /**
  * Function to render each game on to the HTML layout
  */
-function displayGame(finalGame, gameCardIndex) {
-
-
+ function displayGame() {
+  for(var i = 0; i < prepareGamesList().game.length; i++) {
+    var gameCardElem = document.createElement('div');
+    gameCardElem.innerHTML = "";
+    document.getElementsByTagName("div")[0].setAttribute("class", "game-card");
+    var gameCardTitle = document.createAttribute("h5");
+    document.getElementsByTagName("h5")[0].setAttribute("class", "game-title");
+    gameCardTitle.textContent = prepareGamesList().game.name;
+    var gameCardEleImg = document.createElement('img');
+    gameCardEleImg.innerHTML = "";
+    document.getElementsByTagName("img")[0].setAttribute("src", prepareGamesList().game.image);
+  }
 
 }
 
@@ -46,9 +56,12 @@ function getBestDeal(steamGameData, gameCardIndex) {
     .then(function (finalGameData) {
       //displayGame(finalGameData, gameCardIndex);
       gameCardIndex++;
-      var gameCardTitleEl = document.createElement("p");
-      gameCardTitleEl.innerHTML = "Title: " + finalGameData.name;
-      gameCardEls[gameCardIndex].append(gameCardTitleEl);
+        var gameCardTitleEl = document.createElement("p");
+        gameCardTitleEl.innerHTML = "Title: " + finalGameData.name;
+        gameCardEls[gameCardIndex].append(gameCardTitleEl);
+        // var dealLinkEl = document.createElement("a")
+        // dealLinkEl.innerHTML = "best deal" + gameInfo.dealID;
+        // dealLinkEls[gameCardIndex].append(dealLinkEl);
 
     })
 }
@@ -71,11 +84,13 @@ function getSteamIDs(gamesList) {
         game["cheapestDealId"] = steamData[0].cheapestDealID;
         game["thumb"] = steamData[0].thumb;
         game["gameID"] = steamData[0].gameID;
+        console.log(game);
         return game;
+        
       })
       .then(function (updatedGame) {
         getBestDeal(updatedGame);
-        gameCardIndex++
+        gameCardIndex++;
       })
   })
 
@@ -91,6 +106,7 @@ function prepareGamesList(popularGames) {
       image: popularGame.background_image,
       rating: popularGame.rating,
     };
+    console.log(game);
     gamesStore.push(game);
   });
   return gamesStore;
@@ -102,6 +118,7 @@ function prepareGamesList(popularGames) {
 function getPopularGames(
   startDate = defaultStartDate,
   endDate = defaultEndDate
+
 ) {
   var rawgRequest =
     "https://api.rawg.io/api/games?dates=" +
@@ -121,6 +138,8 @@ function getPopularGames(
       getSteamIDs(gamesList);
     })
 }
+
+
 
 getPopularGames(); //to be removed after frontend is fully functional.
 
