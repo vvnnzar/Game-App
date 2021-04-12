@@ -62,38 +62,46 @@ h2 {
   background-color: black;
   padding: 1em;
 }
+
 .banner {
   display: flex;
   color: rgb(255, 255, 255);
 }
+
 .grid-container {
+  padding: 0 16px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(320px, 1fr));
-  grid-template-rows: repeat(3, minmax(320px, 2fr));
-  row-gap: 40px;
-  justify-items: center;
-  padding: 100px;
+
+  grid-gap: 16px;
 }
+
+@media screen and (min-width: 1000px) {
+  .grid-container {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .grid-container {
+    grid-template-columns: auto auto auto;
+  } 
+}
+
+
 .game-card {
   border: 1px solid;
   border-radius: 5px;
   padding: 4px;
-  width: 680px;
   height: 320px;
 }
 .game-card:hover {
   cursor: pointer;
-  box-shadow: 0 0.4rem 1.4rem 0 rgba(244, 8, 173, 0.6);
-  transition: transform 150ms;
-  transform: scale(1.08);
 }
 .card-image {
   max-width: 100%;
   height: px;
   object-fit: contain;
 }
-
-/*random comment*/
 
 .footer {
   background-color: black;
@@ -690,3 +698,29 @@ a span:nth-child(1) {
   background: linear-gradient(90deg, transparent, #03e9f4);
   animation: animate1 1s linear infinite;
 }
+
+@media all and (min-width: 576px) {
+  .grid-container {
+    /* grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); */
+    grid-template-areas:
+      "game-card"
+      "game-card"
+      "game-card"
+      "game-card"
+      "game-card"
+      "game-card"
+      "game-card"
+      "game-card"
+      "game-card";
+  }
+}
+
+/* @media all and (min-width: 992px) {
+  .grid-container {
+    grid-template-areas:
+      "header header header"
+      "main main aside"
+      "footer footer footer";
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+} */
