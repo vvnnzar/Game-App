@@ -6,7 +6,7 @@ This application provides an online search mechanism to identify the popular vid
 
 The following API's have been used to source data requirements:
 
-* Steam
+* RAWG
 * Cheap Shark
 
 
@@ -56,7 +56,7 @@ To update the project with latest code:
 5. Push files to gitlab main branch using command git push
 
 ### Built With
-* API's Steam and Cheap Shark
+* API's RAWG and Cheap Shark
 
 ### Versioning
 
