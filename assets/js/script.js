@@ -10,7 +10,7 @@ var UserStartDate = document.getElementById('.startDate');
 var userEndDate = document.getElementById('.endDate');
 var gameTitle = document.querySelectorAll(".game-title");
 var gameImage = document.querySelectorAll(".card-image");
-var gameDeal = document.querySelectorAll("p")
+var gameDeal = document.querySelectorAll("p");
 
 /**
  * Need to decide on the expected date range inputs, from html inputs.
@@ -24,26 +24,12 @@ var gameDeal = document.querySelectorAll("p")
 /**
  * Function to render each game on to the HTML layout
  */
-//  function displayGame(finalGameData) {
-//    console.log(finalGameData)
-//   for(var i = 0; i < prepareGamesList().game.length; i++) {
-//     var gameCardElem = document.createElement('div');
-//     gameCardElem.innerHTML = "";
-//     document.getElementsByTagName("div")[0].setAttribute("class", "game-card");
-//     var gameCardTitle = document.createAttribute("h5");
-//     document.getElementsByTagName("h5")[0].setAttribute("class", "game-title");
-//     gameCardTitle.textContent = prepareGamesList().game.name;
-//     var gameCardEleImg = document.createElement("img");
-//     gameCardEleImg.innerHTML = "";
-//     document.getElementsByTagName("img")[0].setAttribute("src", prepareGamesList().game.image);
-//   }
-
-// }
-
 function displayGame(finalGame, gameCardIndex) {
-  console.log("Final Game", finalGame)
   gameTitle[gameCardIndex].textContent = finalGame.name;
+  gameTitle[gameCardIndex].setAttribute("color:", "yellow");
   gameImage[gameCardIndex].setAttribute("src", finalGame.image);
+  gameDeal[gameCardIndex].textContent = "Sale Price: $" + finalGame.salePrice;
+
 }
 
 /**
@@ -65,14 +51,6 @@ function getBestDeal(steamGameData, gameCardIndex) {
     })
     .then(function (finalGameData) {
       displayGame(finalGameData, gameCardIndex);
-      // gameCardIndex++;
-      //   var gameCardTitleEl = document.createElement("p");
-      //   gameCardTitleEl.innerHTML = "Title: " + finalGameData.name;
-      //   gameCardEls[gameCardIndex].append(gameCardTitleEl);
-        // var dealLinkEl = document.createElement("a")
-        // dealLinkEl.innerHTML = "best deal" + gameInfo.dealID;
-        // dealLinkEls[gameCardIndex].append(dealLinkEl);
-
     })
 }
 
@@ -94,7 +72,6 @@ function getSteamIDs(gamesList) {
         game["cheapestDealId"] = steamData[0].cheapestDealID;
         game["thumb"] = steamData[0].thumb;
         game["gameID"] = steamData[0].gameID;
-        // console.log(game);
         return game;
         
       })
@@ -116,7 +93,6 @@ function prepareGamesList(popularGames) {
       image: popularGame.background_image,
       rating: popularGame.rating,
     };
-    // console.log(game);
     gamesStore.push(game);
   });
   return gamesStore;
@@ -151,7 +127,7 @@ function getPopularGames(
 
 
 
-getPopularGames(); //to be removed after frontend is fully functional.
+getPopularGames();
 
 /**
  * Event handler for search button
