@@ -159,4 +159,4 @@ var searchHandler = function (event) {
   }
 };
 
-fetchButton.addEventListener("submit", searchHandler());
+fetchButton.addEventListener("submit", searchHandler(), displayGame());
