@@ -1,5 +1,5 @@
 //Declare and intialize variables.
-var fetchButton = document.getElementById(".submit");
+var fetchButton = document.querySelector(".submit");
 var popularGamesList = [];
 var defaultStartDate = "2019-01-01"; //both dates to be generated dynamically
 var defaultEndDate = "2019-12-31";
@@ -8,6 +8,7 @@ var gameCardEls = document.querySelectorAll(".game-card");
 var gameCardIndex = 0;
 var UserStartDate = document.getElementById('.startDate');
 var userEndDate = document.getElementById('.endDate');
+var gameTitle = document.querySelectorAll(".game-title");
 
 /**
  * Need to decide on the expected date range inputs, from html inputs.
@@ -21,19 +22,29 @@ var userEndDate = document.getElementById('.endDate');
 /**
  * Function to render each game on to the HTML layout
  */
- function displayGame() {
-  for(var i = 0; i < prepareGamesList().game.length; i++) {
-    var gameCardElem = document.createElement('div');
-    gameCardElem.innerHTML = "";
-    document.getElementsByTagName("div")[0].setAttribute("class", "game-card");
-    var gameCardTitle = document.createAttribute("h5");
-    document.getElementsByTagName("h5")[0].setAttribute("class", "game-title");
-    gameCardTitle.textContent = prepareGamesList().game.name;
-    var gameCardEleImg = document.createElement('img');
-    gameCardEleImg.innerHTML = "";
-    document.getElementsByTagName("img")[0].setAttribute("src", prepareGamesList().game.image);
-  }
+//  function displayGame(finalGameData) {
+//    console.log(finalGameData)
+//   for(var i = 0; i < prepareGamesList().game.length; i++) {
+//     var gameCardElem = document.createElement('div');
+//     gameCardElem.innerHTML = "";
+//     document.getElementsByTagName("div")[0].setAttribute("class", "game-card");
+//     var gameCardTitle = document.createAttribute("h5");
+//     document.getElementsByTagName("h5")[0].setAttribute("class", "game-title");
+//     gameCardTitle.textContent = prepareGamesList().game.name;
+//     var gameCardEleImg = document.createElement("img");
+//     gameCardEleImg.innerHTML = "";
+//     document.getElementsByTagName("img")[0].setAttribute("src", prepareGamesList().game.image);
+//   }
 
+// }
+
+function displayGame(finalGame, gameCardIndex) {
+  console.log("Final Game", finalGame)
+  for (var i = 0; i < gameCardEls.length; i++) {
+    gameTitle[i].innerHTML = finalGame.name;
+    // gameCardTitle = document.createElement("h5");
+    // gameTitle[i].innerHTML = finalGame.image;
+  }
 }
 
 /**
@@ -54,11 +65,11 @@ function getBestDeal(steamGameData, gameCardIndex) {
       return steamGameData;
     })
     .then(function (finalGameData) {
-      //displayGame(finalGameData, gameCardIndex);
-      gameCardIndex++;
-        var gameCardTitleEl = document.createElement("p");
-        gameCardTitleEl.innerHTML = "Title: " + finalGameData.name;
-        gameCardEls[gameCardIndex].append(gameCardTitleEl);
+      displayGame(finalGameData);
+      // gameCardIndex++;
+      //   var gameCardTitleEl = document.createElement("p");
+      //   gameCardTitleEl.innerHTML = "Title: " + finalGameData.name;
+      //   gameCardEls[gameCardIndex].append(gameCardTitleEl);
         // var dealLinkEl = document.createElement("a")
         // dealLinkEl.innerHTML = "best deal" + gameInfo.dealID;
         // dealLinkEls[gameCardIndex].append(dealLinkEl);
@@ -84,7 +95,7 @@ function getSteamIDs(gamesList) {
         game["cheapestDealId"] = steamData[0].cheapestDealID;
         game["thumb"] = steamData[0].thumb;
         game["gameID"] = steamData[0].gameID;
-        console.log(game);
+        // console.log(game);
         return game;
         
       })
@@ -106,7 +117,7 @@ function prepareGamesList(popularGames) {
       image: popularGame.background_image,
       rating: popularGame.rating,
     };
-    console.log(game);
+    // console.log(game);
     gamesStore.push(game);
   });
   return gamesStore;
@@ -159,4 +170,4 @@ var searchHandler = function (event) {
   }
 };
 
-fetchButton.addEventListener("submit", searchHandler(), displayGame());
+fetchButton.addEventListener("submit", searchHandler());
