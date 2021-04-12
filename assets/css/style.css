@@ -72,6 +72,7 @@ h2 {
   grid-template-rows: repeat(3, minmax(320px, 2fr));
   row-gap: 40px;
   justify-items: center;
+  padding: 100px;
 }
 .game-card {
   border: 1px solid;
