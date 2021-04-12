@@ -1,12 +1,16 @@
 //Declare and intialize variables.
-var fetchButton = document.getElementById("fetch-button");
-var repoTable = document.getElementById("something");
+var fetchButton = document.querySelector(".submit");
 var popularGamesList = [];
 var defaultStartDate = "2019-01-01"; //both dates to be generated dynamically
 var defaultEndDate = "2019-12-31";
 var gamesStore = [];
 var gameCardEls = document.querySelectorAll(".game-card");
 var gameCardIndex = 0;
+var UserStartDate = document.getElementById('.startDate');
+var userEndDate = document.getElementById('.endDate');
+var gameTitle = document.querySelectorAll(".game-title");
+var gameImage = document.querySelectorAll(".card-image");
+var gameDeal = document.querySelectorAll("p");
 
 /**
  * Need to decide on the expected date range inputs, from html inputs.
@@ -21,8 +25,10 @@ var gameCardIndex = 0;
  * Function to render each game on to the HTML layout
  */
 function displayGame(finalGame, gameCardIndex) {
-
-
+  gameTitle[gameCardIndex].textContent = finalGame.name;
+  gameTitle[gameCardIndex].setAttribute("color:", "yellow");
+  gameImage[gameCardIndex].setAttribute("src", finalGame.image);
+  gameDeal[gameCardIndex].textContent = "Sale Price: $" + finalGame.salePrice;
 
 }
 
@@ -44,12 +50,7 @@ function getBestDeal(steamGameData, gameCardIndex) {
       return steamGameData;
     })
     .then(function (finalGameData) {
-      //displayGame(finalGameData, gameCardIndex);
-      gameCardIndex++;
-      var gameCardTitleEl = document.createElement("p");
-      gameCardTitleEl.innerHTML = "Title: " + finalGameData.name;
-      gameCardEls[gameCardIndex].append(gameCardTitleEl);
-
+      displayGame(finalGameData, gameCardIndex);
     })
 }
 
@@ -60,7 +61,7 @@ function getBestDeal(steamGameData, gameCardIndex) {
 
 function getSteamIDs(gamesList) {
   var gameCardIndex = 0;
-  gamesList.forEach(function (game) {
+  gamesList.forEach(function (game, index) {
     var steamRequest =
       "https://www.cheapshark.com/api/1.0/games?title=" + game.name;
     fetch(steamRequest)
@@ -72,10 +73,11 @@ function getSteamIDs(gamesList) {
         game["thumb"] = steamData[0].thumb;
         game["gameID"] = steamData[0].gameID;
         return game;
+        
       })
       .then(function (updatedGame) {
-        getBestDeal(updatedGame);
-        gameCardIndex++
+        getBestDeal(updatedGame, index);
+        gameCardIndex++;
       })
   })
 
@@ -102,6 +104,7 @@ function prepareGamesList(popularGames) {
 function getPopularGames(
   startDate = defaultStartDate,
   endDate = defaultEndDate
+
 ) {
   var rawgRequest =
     "https://api.rawg.io/api/games?dates=" +
@@ -122,7 +125,9 @@ function getPopularGames(
     })
 }
 
-getPopularGames(); //to be removed after frontend is fully functional.
+
+
+getPopularGames();
 
 /**
  * Event handler for search button
