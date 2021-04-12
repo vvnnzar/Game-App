@@ -9,6 +9,8 @@ var gameCardIndex = 0;
 var UserStartDate = document.getElementById('.startDate');
 var userEndDate = document.getElementById('.endDate');
 var gameTitle = document.querySelectorAll(".game-title");
+var gameImage = document.querySelectorAll(".card-image");
+var gameDeal = document.querySelectorAll("p")
 
 /**
  * Need to decide on the expected date range inputs, from html inputs.
@@ -40,11 +42,8 @@ var gameTitle = document.querySelectorAll(".game-title");
 
 function displayGame(finalGame, gameCardIndex) {
   console.log("Final Game", finalGame)
-  for (var i = 0; i < gameCardEls.length; i++) {
-    gameTitle[i].innerHTML = finalGame.name;
-    // gameCardTitle = document.createElement("h5");
-    // gameTitle[i].innerHTML = finalGame.image;
-  }
+  gameTitle[gameCardIndex].textContent = finalGame.name;
+  gameImage[gameCardIndex].setAttribute("src", finalGame.image);
 }
 
 /**
@@ -65,7 +64,7 @@ function getBestDeal(steamGameData, gameCardIndex) {
       return steamGameData;
     })
     .then(function (finalGameData) {
-      displayGame(finalGameData);
+      displayGame(finalGameData, gameCardIndex);
       // gameCardIndex++;
       //   var gameCardTitleEl = document.createElement("p");
       //   gameCardTitleEl.innerHTML = "Title: " + finalGameData.name;
@@ -84,7 +83,7 @@ function getBestDeal(steamGameData, gameCardIndex) {
 
 function getSteamIDs(gamesList) {
   var gameCardIndex = 0;
-  gamesList.forEach(function (game) {
+  gamesList.forEach(function (game, index) {
     var steamRequest =
       "https://www.cheapshark.com/api/1.0/games?title=" + game.name;
     fetch(steamRequest)
@@ -100,7 +99,7 @@ function getSteamIDs(gamesList) {
         
       })
       .then(function (updatedGame) {
-        getBestDeal(updatedGame);
+        getBestDeal(updatedGame, index);
         gameCardIndex++;
       })
   })
