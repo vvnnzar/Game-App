@@ -12,11 +12,12 @@ The following API's have been used to source data requirements:
 - Cheap Shark
 
 ### Project Link
+https://vvnnzar.github.io/Game-App/
 
 ### Screen layout and Design
 
 The following image depicts the web application's appearance and functionality:
-![Game App Screen Design](./assets/screen design/screen design.png)
+(![Game App Screen Design](https://github.com/vvnnzar/Game-App/blob/main/assets/screen%20design/screen%20design.png))
 
 ### Installation
 
